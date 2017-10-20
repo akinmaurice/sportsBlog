@@ -4,15 +4,15 @@ include mixins/_commentCard
 
 block content
   .col-md-8
-    h1.mt-4 Post Title
-    p.lead by
-      a(href="#")  User
+    h1.mt-4= post.title
+    p.lead by&nbsp;
+      a(href="#")= post.author.name
     hr
-    p Posted on January 1, 2017 at 12:00 PM
+    p= h.moment(post.created).fromNow()
     hr
-    img(src="/images/blog.jpg", alt="blog Title").img-fluid.rounded
+    img(src=`/images/${post.photo}.jpg`, alt=`${post.title}`).img-fluid.rounded
     hr
-    p.lead psum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?
+    p.lead= post.description
     hr
     .card.my-4
       h5.card-header Leave a Comment:

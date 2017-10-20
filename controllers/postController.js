@@ -2,14 +2,18 @@ const mongoose = require('mongoose');
 const Post = mongoose.model('Post');
 //Controller to get the home Page and display all posts
 exports.homePage = async (req, res) => {
-     //Query the Database for all the Posts in the DB
-    const posts = await Post.find();
-    //res.render('stores', { title: 'Blog', stores });
-    res.render('index', { title: 'Home Page' })
+    //Query the Database for all the Posts in the DB
+    const posts = await Post.find().populate('author');
+    res.render('index', { title: 'Home Page', posts })
 }
 //Controller to get post by slug
 exports.getPostBySlug = async (req, res) => {
-    res.render('blog', {title: 'Blog Page'});
+    const post = await Post.findOne({ slug: req.params.slug }).populate('author');
+    if (!post) {
+        res.redirect('/'); //Send them to 404 page!
+        return;
+    }
+    res.render('blog', { title: post.title, post });
 }
 //Controller to get new post form page
 exports.getNewPost = (req, res) => {

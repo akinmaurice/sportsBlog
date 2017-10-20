@@ -1,11 +1,11 @@
-mixin blogCard(blog = {})
+mixin blogCard(post = {})
   .card.mb-4
     .thumbnail
-      img(src="/images/blog.jpg", alt="Blog Post Image").blog-card-image
+      img(src=`/images/${post.photo}.jpg`, alt="Blog Post Image").blog-card-image
       .card-body
-        h2.card-title Post Title
-        p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!
-        a(href="/post/5785785hjrjhbth").btn.btn-primary Read More &rarr;
-      .card-footer.text-muted
-        p Posted on Januery 1, 2017 by
-          a(href="#") Start Bootstrap
+        h2.card-title= post.title
+        p.card-text= post.description
+        a(href=`/post/${post.slug}`).btn.btn-primary Read More &rarr;
+      .card-footer
+        p #{h.moment(post.created).fromNow()}  by&nbsp;
+          a(href="#")= post.author.name

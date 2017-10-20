@@ -5,7 +5,8 @@ include mixins/_blogCard
 block content
   .col-md-8
     h1.my-4
-    +blogCard()
+    each post in posts
+      +blogCard(post)
 
 
 
