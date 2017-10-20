@@ -1,5 +1,11 @@
 extends layout
 
+include mixins/_blogCard
+
 block content
-  h1= title
-  p Welcome to #{title}
+  .col-md-8
+    h1.my-4
+    +blogCard()
+
+
+

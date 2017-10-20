@@ -1,7 +1,64 @@
 doctype html
-html
+html(lang="en")
   head
-    title= title
+    title= `${title} | ${h.siteName}`
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/jquery/jquery.min.js')
+    script(src='/javascripts/popper/popper.min.js')
   body
-    block content
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+      .container
+        a(href="/").navbar-brand Sports Blog!
+        button(type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation").navbar-toggler
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse(id="navbarResponsive")
+          ul.navbar-nav.ml-auto
+            li.nav-item.active
+              a(href="/").nav-link Home
+                span.sr-only (current)
+            li.nav-item
+              a.nav-link(href="#") About
+            li.nav-item
+              a.nav-link(href="#") Services
+            li.nav-item
+              a.nav-link(href="#") Contact
+    .container
+      .row
+      block messages
+        if locals.flashes
+          .inner
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`alert alert-${category}` role="alert")
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
+        block content
+
+        block sidebar
+          .col-md-4
+            .card.my-4
+              h5.card-header Search
+              .card-body
+                .input-group
+                  input(type="text" placeholder="Search for post...").form-control
+                  span.input-group-btn
+                  button.btn.btn-secondary(type="button") Go!
+            .card.my-4
+              h5.card-header Tags
+              .card-body
+                .list-group
+                  a(href="#").list-group-item.list-group-item-action Cras Justo Odio
+            .card.my-4
+              h5.card-header Side Widget
+              .card-body
+                p Put something here,image or ads
+
+    block footer
+      footer.py-5.bg-dark.footer
+        .container
+          p.m-0.text-center.text-white Copyright &copy; Your Website 2017
+

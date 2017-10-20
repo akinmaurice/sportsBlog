@@ -16,9 +16,10 @@ const flash = require('connect-flash');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
 //Import all of our models
-//require('./models/Activity');
-//require('./models/User');
-//require ('./handlers/passport');
+require('./models/Post');
+require('./models/User');
+
+require ('./handlers/passport');
 
 // Connect to our Database and handle an bad connections
 mongoose.connect(process.env.DATABASE);
