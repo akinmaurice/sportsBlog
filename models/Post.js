@@ -37,7 +37,7 @@ postSchema.pre('save', async function (next) {
     }
     /* THis takes the title of the post, run it through the schema
     and get the slug field and assign it to the output */
-    this.slug = slug(this.name);
+    this.slug = slug(this.title);
     //find post with the same slug.
     const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
     const postWithSlug = await this.constructor.find({ slug: slugRegEx });

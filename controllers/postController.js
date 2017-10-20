@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Post = mongoose.model('Post');
-const promisify = require('es6-promisify');
 //Controller to get the home Page and display all posts
 exports.homePage = async (req, res) => {
      //Query the Database for all the Posts in the DB
@@ -27,7 +26,7 @@ used flash to display the error.
 exports.newPost = async (req, res) => {
     req.body.author = req.user._id;
     const post = await (new Post(req.body)).save();
-    //req.flash('success', `Successfully Created ${store.name}. Care to leave a review?`);
-    //res.redirect(`/store/${store.slug}`);
-    res.redirect('/');
+    req.flash('success', `Successfully Created ${post.title}.`);
+    res.redirect(`/post/${post.slug}`);
+    //res.redirect('/');
 }
