@@ -1,0 +1,29 @@
+extends layout
+
+include mixins/_commentCard
+
+block content
+  .col-md-8
+    h1.mt-4 Post Title
+    p.lead by
+      a(href="#")  User
+    hr
+    p Posted on January 1, 2017 at 12:00 PM
+    hr
+    img(src="/images/blog.jpg", alt="blog Title").img-fluid.rounded
+    hr
+    p.lead psum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?
+    hr
+    .card.my-4
+      h5.card-header Leave a Comment:
+      .card-body
+        form(action="#" method="POST")
+          .form-group
+            input.form-control(type="text" name="name" placeholder="Full Name")
+          .form-group
+            textarea.form-control(rows="3" name="comment")
+          button.btn.btn-primary(type="submit") Submit
+    .card.my-4
+      h5.card-header Comments
+      .card-body
+        +commentCard()

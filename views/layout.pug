@@ -24,18 +24,29 @@ html(lang="en")
               a.nav-link(href="#") Services
             li.nav-item
               a.nav-link(href="#") Contact
+            if user
+                li.nav-item.dopdown
+                   a.nav-link.dropdown-toogle(href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")= user.email
+                   .dropdown-menu(aria-labelledby="dropdown01")
+                     a.dropdown-item(href="#") Action
+                     a.dropdown-item(href="#") Action
+                     a.dropdown-item(href="#") Action
+                li
+                  a.nav-link(href="/logout") logout
+    .container
+      .row.text-center
+        block messages
+          if locals.flashes
+            .inner
+              .flash-messages
+                - const categories = Object.keys(locals.flashes)
+                each category in categories
+                  each message in flashes[category]
+                    .flash(class=`alert alert-${category}` role="alert")
+                      p.flash__text!= message
+                      button.flash__remove(onClick="this.parentElement.remove()") &times;
     .container
       .row
-      block messages
-        if locals.flashes
-          .inner
-            .flash-messages
-              - const categories = Object.keys(locals.flashes)
-              each category in categories
-                each message in flashes[category]
-                  .flash(class=`alert alert-${category}` role="alert")
-                    p.flash__text!= message
-                    button.flash__remove(onClick="this.parentElement.remove()") &times;
         block content
 
         block sidebar
@@ -46,7 +57,7 @@ html(lang="en")
                 .input-group
                   input(type="text" placeholder="Search for post...").form-control
                   span.input-group-btn
-                  button.btn.btn-secondary(type="button") Go!
+                  button.btn.btn-primary(type="button") Go!
             .card.my-4
               h5.card-header Tags
               .card-body
