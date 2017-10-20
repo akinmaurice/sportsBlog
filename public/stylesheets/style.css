@@ -98,5 +98,10 @@ textarea {
 }
 
 a {
-    color: #0b263f;
+    color: #334BBF;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #334BBF;
 }
