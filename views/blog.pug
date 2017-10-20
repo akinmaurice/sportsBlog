@@ -14,6 +14,10 @@ block content
     hr
     p.lead= post.description
     hr
+    if post.tags
+      each tag in post.tags
+        a.btn.btn-warning(href=`/tags/${tag}`)
+          span.tag__text #{tag}
     .card.my-4
       h5.card-header Leave a Comment:
       .card-body

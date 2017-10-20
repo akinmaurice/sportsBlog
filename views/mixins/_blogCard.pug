@@ -5,7 +5,7 @@ mixin blogCard(post = {})
       .card-body
         h2.card-title= post.title
         p.card-text= post.description
-        a(href=`/post/${post.slug}`).btn.btn-primary Read More &rarr;
+        a(href=`/post/${post.slug}`).btn.btn-warning Read More &rarr;
       .card-footer
         p #{h.moment(post.created).fromNow()}  by&nbsp;
           a(href="#")= post.author.name
