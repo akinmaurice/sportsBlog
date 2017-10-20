@@ -1,4 +1,4 @@
-# sportsBlog
+# SportsBlog
 Blog using Nodejs, Expressjs, Pug and Mongodb.
 
 # Features
@@ -12,3 +12,14 @@ Bcrypt Password Hash
 Rename the env.example file to .env and make changes to the enviroment variables.
 
 start Mongo DB
+
+# User Administration
+Navigate to /register to register a new user and /login to signin with an existing user.
+
+# Contributing
+
+Contributions are more than welcome!
+
+# License
+
+See license.txt
