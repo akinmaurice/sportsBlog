@@ -3,14 +3,16 @@ html(lang="en")
   head
     title= `${title} | ${h.siteName}`
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-social.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/javascripts/bootstrap.min.js')
     script(src='/javascripts/jquery/jquery.min.js')
     script(src='/javascripts/popper/popper.min.js')
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-      .container
-        a(href="/").navbar-brand Sports Blog!
+      .container-fluid
+        a(href="/").navbar-brand SPORTS BLOG
         button(type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation").navbar-toggler
           span.navbar-toggler-icon
         .collapse.navbar-collapse(id="navbarResponsive")
@@ -18,12 +20,6 @@ html(lang="en")
             li.nav-item.active
               a(href="/").nav-link Home
                 span.sr-only (current)
-            li.nav-item
-              a.nav-link(href="#") About
-            li.nav-item
-              a.nav-link(href="#") Services
-            li.nav-item
-              a.nav-link(href="#") Contact
             if user
                 li.nav-item.dopdown
                    a.nav-link.dropdown-toogle(href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")= user.email
@@ -62,7 +58,8 @@ html(lang="en")
               h5.card-header Tags
               .card-body
                 .list-group
-                  a(href="#").list-group-item.list-group-item-action Cras Justo Odio
+                  each item in h.menu
+                    a(href=`/tags/${item}`).list-group-item.list-group-item-action= item
             .card.my-4
               h5.card-header Side Widget
               .card-body

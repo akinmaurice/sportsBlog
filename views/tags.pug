@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_blogCard
+
+block content
+  .col-md-8
+    h1.my-4
+    each post in posts
+      +blogCard(post)
+
+
+

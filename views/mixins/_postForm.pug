@@ -6,8 +6,7 @@ mixin postForm()
     .form-group
       textarea(name="description", cols="30", rows="10").form-control
     .form-group
-      - const choices = ['Football', 'Basketball', 'Tennis', 'Golf']
-      each choice in choices
+      each choice in h.menu
         input(type="checkbox" id=choice value=choice name="tags").form-control
         label(for=choice).custom-control-descriptionx= choice
     .formgroup

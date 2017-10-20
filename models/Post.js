@@ -47,6 +47,19 @@ postSchema.pre('save', async function (next) {
     //Move to the next function. i.e continue to save the store
     next();
 });
-
+//Model to get the tag list
+postSchema.statics.getTagsList = function () {
+    return this.aggregate([
+        { $unwind: '$tags' },
+        { $group: { _id: '$tags', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+    ]);
+}
+//Add a virtual field to find comments where post_id = comment article
+postSchema.virtual('comments', {
+ref: 'Comment', // What model to link
+localField: '_id', //field on the post schema
+foreignField: 'article' //Field on the COmment schema
+});
 
 module.exports = mongoose.model('Post', postSchema);

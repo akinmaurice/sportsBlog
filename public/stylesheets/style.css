@@ -92,3 +92,11 @@ body {
 .btn {
     margin: 5px;
 }
+
+textarea {
+    resize: none;
+}
+
+a {
+    color: #0b263f;
+}

@@ -18,6 +18,7 @@ const errorHandlers = require('./handlers/errorHandlers');
 //Import all of our models
 require('./models/Post');
 require('./models/User');
+require('./models/Comment');
 
 require ('./handlers/passport');
 

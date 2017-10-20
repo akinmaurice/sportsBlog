@@ -8,7 +8,7 @@ exports.homePage = async (req, res) => {
 }
 //Controller to get post by slug
 exports.getPostBySlug = async (req, res) => {
-    const post = await Post.findOne({ slug: req.params.slug }).populate('author');
+    const post = await Post.findOne({ slug: req.params.slug }).populate('author comments');
     if (!post) {
         res.redirect('/'); //Send them to 404 page!
         return;
@@ -33,4 +33,14 @@ exports.newPost = async (req, res) => {
     req.flash('success', `Successfully Created ${post.title}.`);
     res.redirect(`/post/${post.slug}`);
     //res.redirect('/');
+}
+
+//Controller to get posts by tag
+exports.getPostsByTag = async (req, res) => {
+    const tag = req.params.tag;
+    const tagQuery = tag || { $exists: true };
+    const tagsPromise = Post.getTagsList();
+    const postsPromise = Post.find({ tags: tagQuery }).populate('author');
+    const [tags, posts] = await Promise.all([tagsPromise, postsPromise]);
+    res.render('tags', { tags, title: `${tag} Articles`, posts });
 }

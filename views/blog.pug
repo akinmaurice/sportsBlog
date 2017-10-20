@@ -4,7 +4,8 @@ include mixins/_commentCard
 
 block content
   .col-md-8
-    h1.mt-4= post.title
+    h1.mt-4
+      a(href=`/post/${post.slug}`)= post.title
     p.lead by&nbsp;
       a(href="#")= post.author.name
     hr
@@ -18,16 +19,31 @@ block content
       each tag in post.tags
         a.btn.btn-warning(href=`/tags/${tag}`)
           span.tag__text #{tag}
+    hr
+    p
+      a(href="#").btn.btn-social-icon.btn-twitter
+        span.fa.fa-twitter
+      a(href="#").btn.btn-social-icon.btn-facebook
+        span.fa.fa-facebook
+      a(href="#").btn.btn-social-icon.btn-pinterest
+        span.fa.fa-pinterest
+      a(href="#").btn.btn-social-icon.btn-github
+        span.fa.fa-envelope
+    hr
     .card.my-4
       h5.card-header Leave a Comment:
       .card-body
-        form(action="#" method="POST")
+        form(action=`/post/${post._id}/comment` method="POST")
           .form-group
+            input(type="hidden" name="post_slug" value=`${post.slug}`)
             input.form-control(type="text" name="name" placeholder="Full Name")
           .form-group
             textarea.form-control(rows="3" name="comment")
           button.btn.btn-primary(type="submit") Submit
     .card.my-4
-      h5.card-header Comments
-      .card-body
-        +commentCard()
+      if post.comments
+        h5.card-header Comments
+        .card-body
+          each comment in post.comments
+            +commentCard(comment)
+            hr
