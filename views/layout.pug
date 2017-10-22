@@ -22,7 +22,7 @@ html(lang="en")
                 span.sr-only (current)
             if user
                 li.nav-item.dopdown
-                   a.nav-link.dropdown-toogle(href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")= user.email
+                   a.nav-link.dropdown-toogle(href="/account" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")= user.email
                    .dropdown-menu(aria-labelledby="dropdown01")
                      a.dropdown-item(href="#") Action
                      a.dropdown-item(href="#") Action
@@ -33,7 +33,7 @@ html(lang="en")
       .row.text-center
         block messages
           if locals.flashes
-            .inner
+            .col-lg-12.text-center
               .flash-messages
                 - const categories = Object.keys(locals.flashes)
                 each category in categories
@@ -68,5 +68,5 @@ html(lang="en")
     block footer
       footer.py-5.bg-dark.footer
         .container
-          p.m-0.text-center.text-white Copyright &copy; Your Website 2017
+          p.m-0.text-center.text-white Copyright &copy; akinmaurice 2017
 

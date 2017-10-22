@@ -6,7 +6,7 @@ block content
   .col-md-8
     h1.mt-4
       a(href=`/post/${post.slug}`)= post.title
-    p.lead by&nbsp;
+    p by&nbsp;
       a(href="#")= post.author.name
     hr
     p= h.moment(post.created).fromNow()

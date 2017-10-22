@@ -37,3 +37,7 @@ exports.registerUser = async (req, res, next) => {
     await registerWithPromise(user, req.body.password);
     next();
 }
+//controller to get User account
+exports.account = async(req, res) => {
+    res.render('account', {title: `My Account - ${req.user.email}`});
+}

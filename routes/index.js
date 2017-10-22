@@ -4,15 +4,16 @@ const userController = require('../controllers/userController');
 const postController = require('../controllers/postController');
 const authController = require('../controllers/authController');
 const commentController = require('../controllers/commentController');
+const { catchErrors } = require('../handlers/errorHandlers');
 
 /* GET home page. */
-router.get('/',postController.homePage);
+router.get('/', catchErrors(postController.homePage));
 
 /* GET get blog post by slug. */
-router.get('/post/:slug',postController.getPostBySlug);
+router.get('/post/:slug', catchErrors(postController.getPostBySlug));
 
 /* GET get user Login page. */
-router.get('/login',userController.getLogin);
+router.get('/login', userController.getLogin);
 
 /* GET get user Register page. */
 router.get('/register',userController.getRegister);
@@ -27,15 +28,20 @@ router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
 /* Rouute to get the page to add new post */
-router.get('/add', authController.isLoggedIn, postController.getNewPost);
+router.get('/add', authController.isLoggedIn, catchErrors(postController.getNewPost));
 
 /* Rouute to create new blog post */
-router.post('/add', authController.isLoggedIn, postController.newPost);
+router.post('/add', authController.isLoggedIn, catchErrors(postController.newPost));
 
 /* Rouute to get posts by tags */
-router.get('/tags/:tag', postController.getPostsByTag);
+router.get('/tags/:tag', catchErrors(postController.getPostsByTag));
 
 /* Rouute to post comment for articles */
-router.post('/post/:id/comment', commentController.postComment);
+router.post('/post/:id/comment', catchErrors(commentController.postComment));
 
+/* Route to get user account page*/
+router.get('/account', authController.isLoggedIn, catchErrors(userController.account));
+
+/*API End POINTS */
+router.get('/api/search', catchErrors());
 module.exports = router;
