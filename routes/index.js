@@ -43,5 +43,5 @@ router.post('/post/:id/comment', catchErrors(commentController.postComment));
 router.get('/account', authController.isLoggedIn, catchErrors(userController.account));
 
 /*API End POINTS */
-router.get('/api/search', catchErrors());
+router.get('/api/search', catchErrors(postController.searchPost));
 module.exports = router;

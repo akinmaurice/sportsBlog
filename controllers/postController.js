@@ -3,7 +3,7 @@ const Post = mongoose.model('Post');
 //Controller to get the home Page and display all posts
 exports.homePage = async (req, res) => {
     //Query the Database for all the Posts in the DB
-    const posts = await Post.find().sort({created: -1}).populate('author');
+    const posts = await Post.find().sort({ created: -1 }).populate('author');
     res.render('index', { title: 'Home Page', posts })
 }
 //Controller to get post by slug
@@ -43,4 +43,18 @@ exports.getPostsByTag = async (req, res) => {
     const postsPromise = Post.find({ tags: tagQuery }).populate('author');
     const [tags, posts] = await Promise.all([tagsPromise, postsPromise]);
     res.render('tags', { tags, title: `${tag} Articles`, posts });
+}
+
+/*Search COntroller */
+exports.searchPost = async (req, res) => {
+    const posts = await Post.find({
+        $text: {
+            $search: req.query.q
+        }
+    }, {
+            score: { $meta: 'textScore' }
+        }).sort({
+            score: { $meta: 'textScore' }
+        }).limit(5);
+    res.json(posts);
 }

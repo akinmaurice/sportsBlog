@@ -28,6 +28,11 @@ const postSchema = new mongoose.Schema({
         required: 'Blog Post Should have a valid User!'
     }
 });
+//Define Our Indexes for quick queries and searches
+postSchema.index({
+    title: 'text',
+    description: 'text'
+});
 /*Auto generate slugs and pre-save before someone saves a post in the schema.
 not needed for new post only stores with changed title*/
 postSchema.pre('save', async function (next) {
@@ -57,9 +62,9 @@ postSchema.statics.getTagsList = function () {
 }
 //Add a virtual field to find comments where post_id = comment article
 postSchema.virtual('comments', {
-ref: 'Comment', // What model to link
-localField: '_id', //field on the post schema
-foreignField: 'article' //Field on the COmment schema
+    ref: 'Comment', // What model to link
+    localField: '_id', //field on the post schema
+    foreignField: 'article' //Field on the COmment schema
 });
 
 module.exports = mongoose.model('Post', postSchema);

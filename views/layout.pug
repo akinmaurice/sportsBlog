@@ -51,9 +51,10 @@ html(lang="en")
               h5.card-header Search
               .card-body
                 .input-group
-                  input(type="text" placeholder="Search for post...").form-control
-                  span.input-group-btn
-                  button.btn.btn-primary(type="button") Go!
+                  form.form-control(action="/api/search" method="GET")
+                    input(type="text" name="q" placeholder="Search for post...").form-control
+                    span.input-group-btn
+                    button.btn.btn-primary(type="button") Go!
             .card.my-4
               h5.card-header Tags
               .card-body
