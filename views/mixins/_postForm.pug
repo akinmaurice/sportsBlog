@@ -1,13 +1,16 @@
 mixin postForm()
-  form.form-signin(action="/add" method="POST")
+  form.form-control(action="/add" method="POST")
     .form-group
       input(type="hidden" name="photo" value="blog")
       input(type="text" name="title" placeholder="Post Title").form-control
     .form-group
       textarea(name="description", cols="30", rows="10").form-control
     .form-group
+      input(type="file" name="image").form-control
+    .form-group
       each choice in h.menu
-        input(type="checkbox" id=choice value=choice name="tags").form-control
-        label(for=choice).custom-control-descriptionx= choice
+        .form-check.form-check-inline
+          label.form-check-label(for="choice")= choice
+            input(type="checkbox" id="choice" name="tags" value=choice).form-check-input
     .formgroup
       button.btn.btn-primary.btn-lg.btn-block(type="submit" name="Login") Submit

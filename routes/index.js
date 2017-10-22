@@ -8,6 +8,10 @@ const { catchErrors } = require('../handlers/errorHandlers');
 
 /* GET home page. */
 router.get('/', catchErrors(postController.homePage));
+//Router to get all posts first page
+router.get('/posts', catchErrors(postController.homePage));
+//Router to get all posts paginated pages
+router.get('/posts/page/:page', catchErrors(postController.homePage));
 
 /* GET get blog post by slug. */
 router.get('/post/:slug', catchErrors(postController.getPostBySlug));
@@ -28,7 +32,7 @@ router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
 /* Rouute to get the page to add new post */
-router.get('/add', authController.isLoggedIn, catchErrors(postController.getNewPost));
+router.get('/add', authController.isLoggedIn, postController.getNewPost);
 
 /* Rouute to create new blog post */
 router.post('/add', authController.isLoggedIn, catchErrors(postController.newPost));
@@ -36,11 +40,17 @@ router.post('/add', authController.isLoggedIn, catchErrors(postController.newPos
 /* Rouute to get posts by tags */
 router.get('/tags/:tag', catchErrors(postController.getPostsByTag));
 
+/* Rouute to get posts by tags paginated pages */
+router.get('/tags/:tag/posts/page/:page', catchErrors(postController.getPostsByTag));
+
 /* Rouute to post comment for articles */
 router.post('/post/:id/comment', catchErrors(commentController.postComment));
 
 /* Route to get user account page*/
 router.get('/account', authController.isLoggedIn, catchErrors(userController.account));
+
+/*ROute to get all user posts */
+router.get('/account/posts', authController.isLoggedIn, catchErrors(postController.getUserPosts));
 
 /*API End POINTS */
 router.get('/api/search', catchErrors(postController.searchPost));

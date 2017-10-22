@@ -1,11 +1,15 @@
 extends layout
 
+include mixins/_accountSidebar
 include mixins/_postForm
 
 block content
+  +accountSidebar()
   .col-md-8
-    h1.my-4= title
-      +postForm()
+    .card.my-4
+      h5.card-header= title
+      .card-body
+        +postForm()
 block sidebar
 
 block footer

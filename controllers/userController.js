@@ -39,5 +39,5 @@ exports.registerUser = async (req, res, next) => {
 }
 //controller to get User account
 exports.account = async(req, res) => {
-    res.render('account', {title: `My Account - ${req.user.email}`});
+    res.render('account', {title: 'My Account'});
 }
