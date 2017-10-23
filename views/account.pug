@@ -1,6 +1,8 @@
 extends layout
 
 include mixins/_accountSidebar
+include mixins/_totalUserPosts
+include mixins/_totalUserViews
 
 block content
   +accountSidebar()
@@ -8,6 +10,10 @@ block content
     .card.my-4
       h5.card-header My Account - #{user.email}
       .card-body
+        .row
+          +totalUserPosts(count)
+          +totalUserViews(count)
+
 
 block sidebar
 

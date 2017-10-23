@@ -72,11 +72,13 @@ exports.getPostsByTag = async (req, res) => {
 
 //Controller to get all uyser posts with pagination
 exports.getUserPosts = async (req, res) => {
+    const posts = await Post.find({ author: req.user._id}).sort({ created: -1 });
     res.render('userPosts', {title: 'My Posts'});
 }
 
 /*Search COntroller */
 exports.searchPost = async (req, res) => {
+    const searchTerm = req.query.q;
     const posts = await Post.find({
         $text: {
             $search: req.query.q
@@ -85,6 +87,7 @@ exports.searchPost = async (req, res) => {
             score: { $meta: 'textScore' }
         }).sort({
             score: { $meta: 'textScore' }
-        }).limit(5);
-    res.json(posts);
+        }).sort({ created: -1 }).populate('author');
+        res.render('search', {title: `Search results for: ${searchTerm}`, searchTerm, posts});
+    //res.json({posts, searchTerm});
 }

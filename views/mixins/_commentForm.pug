@@ -1,0 +1,8 @@
+mixin commentForm()
+  form(action=`/post/${post._id}/comment` method="POST")
+    .form-group
+      input(type="hidden" name="post_slug" value=`${post.slug}`)
+      input.form-control(type="text" name="name" placeholder="Full Name")
+    .form-group
+      textarea.form-control(rows="3" name="comment")
+    button.btn.btn-primary(type="submit") Submit

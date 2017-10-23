@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Post = mongoose.model('Post');
 const promisify = require('es6-promisify');
 //Controller to get login page
 exports.getLogin = (req, res) => {
@@ -38,6 +39,7 @@ exports.registerUser = async (req, res, next) => {
     next();
 }
 //controller to get User account
-exports.account = async(req, res) => {
-    res.render('account', {title: 'My Account'});
+exports.account = async (req, res) => {
+    const count = await Post.find({ author: req.user._id}).count();
+    res.render('account', {title: 'My Account', count});
 }
