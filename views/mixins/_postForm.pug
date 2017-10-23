@@ -1,16 +1,17 @@
-mixin postForm()
-  form.form-control(action="/add" method="POST")
+mixin postForm(post = {})
+  form.form-control(action=`/add/${post._id || ''}` method="POST")
     .form-group
-      input(type="hidden" name="photo" value="blog")
-      input(type="text" name="title" placeholder="Post Title").form-control
+      input(type="hidden" name="photo" value=`${post.photo}` )
+      input(type="text" name="title" placeholder="Post Title" value=post.title).form-control
     .form-group
-      textarea(name="description", cols="30", rows="10").form-control
+      textarea(name="description", cols="30", rows="10").form-control= post.description
     .form-group
       input(type="file" name="image").form-control
     .form-group
+      - const tags = post.tags || []
       each choice in h.menu
         .form-check.form-check-inline
           label.form-check-label(for="choice")= choice
-            input(type="checkbox" id="choice" name="tags" value=choice).form-check-input
+            input(type="checkbox" id="choice" name="tags" value=choice checked=(tags.includes(choice))).form-check-input
     .formgroup
-      button.btn.btn-primary.btn-lg.btn-block(type="submit" name="Login") Submit
+      button.btn.btn-primary.btn-lg.btn-block(type="submit") Submit

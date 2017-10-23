@@ -1,6 +1,7 @@
 extends layout
 
 include mixins/_accountSidebar
+include mixins/_userPostsCard
 
 block content
   +accountSidebar()
@@ -8,11 +9,18 @@ block content
     .card.my-4
       h5.card-header My Posts - #{user.email}
       .card-body
+        table.table.table-stiped
+          thead
+            tr
+              th Article Title
+              th.text-center(colspan=2)
+          tbody
+            each post in posts
+             +userPostsCard(post)
 
 block sidebar
 
 block footer
-
 
 
 

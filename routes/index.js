@@ -52,6 +52,18 @@ router.get('/account', authController.isLoggedIn, catchErrors(userController.acc
 /*ROute to get all user posts */
 router.get('/account/posts', authController.isLoggedIn, catchErrors(postController.getUserPosts));
 
+//Route to Edit a Post by the user
+router.get('/post/:id/edit', authController.isLoggedIn, catchErrors(postController.editPost));
+
+/* Rouute to Edit blog post */
+router.post('/add/:id', authController.isLoggedIn, catchErrors(postController.updatePost));
+
+//Route to get Delete a Post by the user page
+router.get('/post/:id/delete', authController.isLoggedIn, catchErrors(postController.deletePost));
+
+/* Rouute to Remove blog post */
+router.post('/post/:id/delete', authController.isLoggedIn, catchErrors(postController.removePost));
+
 /*API End POINTS */
 router.get('/api/search', catchErrors(postController.searchPost));
 module.exports = router;

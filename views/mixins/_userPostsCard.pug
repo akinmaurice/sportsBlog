@@ -1,0 +1,10 @@
+mixin userPostsCard(post = {})
+  tr
+    td
+      a(href=`/post/${post.slug}` target="_blank")= post.title
+    td.text-right(style="width: 5%")
+      a(href=`/post/${post._id}/edit`).text-danger
+        i.fa.fa-edit
+    td.text-right(style="width: 5%")
+      a(href=`/post/${post._id}/delete`).text-danger
+        i.fa.fa-remove

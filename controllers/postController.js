@@ -66,14 +66,14 @@ exports.getPostsByTag = async (req, res) => {
     if (!posts.length && skip) {
         res.redirect(`/posts/page/${pages}`);
     } else {
-        res.render('tags', { tags, title: `${tag} Articles`, posts, count, page, pages,tag });
+        res.render('tags', { tags, title: `${tag} Articles`, posts, count, page, pages, tag });
     }
 }
 
 //Controller to get all uyser posts with pagination
 exports.getUserPosts = async (req, res) => {
-    const posts = await Post.find({ author: req.user._id}).sort({ created: -1 });
-    res.render('userPosts', {title: 'My Posts'});
+    const posts = await Post.find({ author: req.user._id }).sort({ created: -1 });
+    res.render('userPosts', { title: 'My Posts', posts });
 }
 
 /*Search COntroller */
@@ -88,6 +88,44 @@ exports.searchPost = async (req, res) => {
         }).sort({
             score: { $meta: 'textScore' }
         }).sort({ created: -1 }).populate('author');
-        res.render('search', {title: `Search results for: ${searchTerm}`, searchTerm, posts});
+    res.render('search', { title: `Search results for: ${searchTerm}`, searchTerm, posts });
     //res.json({posts, searchTerm});
+}
+
+//COnfirm Blog Post/Article owner
+const confirmOwner = (post, user) => {
+    if (!post.author.equals(user._id)) {
+        throw Error('You connot Edit this store!');
+    }
+}
+
+//Controller to edit a Blog Post/Article
+exports.editPost = async (req, res) => {
+    // fetch id sent from the url and query db for store
+    const post = await Post.findOne({ _id: req.params.id });
+    confirmOwner(post, req.user);
+    res.render('editPost', { title: `Edit ${post.title}`, post });
+}
+
+//Controller to update a post
+exports.updatePost = async (req, res) => {
+    const post = await Post.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidatos: true }).exec();
+    req.flash('success', `Successfully updated ${post.title}`);
+    res.redirect(`/post/${post.id}/edit`);
+}
+
+//Controller to delete a post
+exports.deletePost = async (req, res) => {
+    // fetch id sent from the url and query db for store
+    const post = await Post.findOne({ _id: req.params.id });
+    confirmOwner(post, req.user);
+    res.render('deletePost', { title: `Delete ${post.title}`, post });
+}
+
+//Controller to Remove a Post
+exports.removePost = async (req, res) => {
+    //Find and Delete the Article
+    const post = await Post.findOneAndRemove({ _id: req.body.post_id }).exec();
+    req.flash('success', `Successfully Deleted ${req.body.post_title}`);
+    res.redirect(`/account/posts`);
 }

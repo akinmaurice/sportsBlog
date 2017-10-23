@@ -1,0 +1,24 @@
+extends layout
+
+include mixins/_accountSidebar
+
+block content
+  +accountSidebar()
+  .col-md-8
+    .card.my-4
+      h5.card-header= title
+      .card-body
+        h3
+          a(href=`/post/${post.slug}`)  #{post.title}
+        p= post.description
+        form.form-group(action=`/post/${post._id}/delete` method="POST")
+          .form-group
+            input(type="hidden" name="post_id" value=post._id)
+            input(type="hidden" name="post_title" value=post.title)
+          .form-group
+            button.btn.btn-danger.btn-block(type="submit") Delete Article
+block sidebar
+
+block footer
+
+
