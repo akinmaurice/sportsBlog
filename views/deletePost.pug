@@ -10,7 +10,7 @@ block content
       .card-body
         h3
           a(href=`/post/${post.slug}`)  #{post.title}
-        p= post.description
+        p!= post.description
         form.form-group(action=`/post/${post._id}/delete` method="POST")
           .form-group
             input(type="hidden" name="post_id" value=post._id)

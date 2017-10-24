@@ -4,5 +4,7 @@ mixin commentForm()
       input(type="hidden" name="post_slug" value=`${post.slug}`)
       input.form-control(type="text" name="name" placeholder="Full Name")
     .form-group
+      input(type="email" name="email" placeholder="Email Address").form-control
+    .form-group
       textarea.form-control(rows="3" name="comment")
     button.btn.btn-primary(type="submit") Submit

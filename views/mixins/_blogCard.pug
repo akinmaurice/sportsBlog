@@ -4,7 +4,7 @@ mixin blogCard(post = {})
       img(src=`/images/${post.photo}.jpg`, alt="Blog Post Image").blog-card-image
       .card-body
         h2.card-title= post.title
-        p.card-text #{post.description.split(' ').slice(0, 25).join(' ')}
+        p.card-text!= post.description.split(' ').slice(0, 25).join(' ')
         a(href=`/post/${post.slug}`).btn.btn-warning Read More &rarr;
       .card-footer
         p #{h.moment(post.created).fromNow()}  by&nbsp;

@@ -19,6 +19,11 @@ const commentSchema = new mongoose.Schema({
         trim: true,
         required: 'Name Cannot be Empty!'
     },
+    email:{
+        type: String,
+        trim: true,
+        required: 'Email Address is Required!'
+    },
     created: {
         type: Date,
         default: Date.now
