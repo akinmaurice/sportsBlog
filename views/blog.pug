@@ -15,6 +15,9 @@ block content
     hr
     img(src=`/images/${post.photo}.jpg`, alt=`${post.title}`).img-fluid.rounded
     hr
+    script
+      | const data = JSON.stringify(post.description);
+      | console.log(typeof(data));
     p.lead= post.description
     hr
     if post.tags
