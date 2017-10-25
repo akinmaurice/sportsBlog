@@ -3,8 +3,9 @@ mixin blogCard(post = {})
     .thumbnail
       img(src=`/uploads/${post.photo}`, alt="Blog Post Image").blog-card-image
       .card-body
-        h2.card-title= post.title
-        p.card-text!= post.description.split(' ').slice(0, 25).join(' ')
+        h4.card-title= post.title
+        p.card-text!= post.description.split(' ').slice(0, 15).join(' ')
+          a(href="#") ...
         a(href=`/post/${post.slug}`).btn.btn-warning Read More &rarr;
       .card-footer
         p #{h.moment(post.created).fromNow()}  by&nbsp;
