@@ -13,7 +13,7 @@ block content
     hr
     p= h.moment(post.created).fromNow()
     hr
-    img(src=`/images/${post.photo}.jpg`, alt=`${post.title}`).img-fluid.rounded
+    img(src=`/uploads/${post.photo}`, alt=`${post.title}`).img-fluid.rounded.blog-card-image
     hr
     script
       | const data = JSON.stringify(post.description);

@@ -1,5 +1,42 @@
 const mongoose = require('mongoose');
 const Post = mongoose.model('Post');
+const multer = require('multer');
+//Import package to resize
+const jimp = require('jimp');
+//packege for uniqure identifier to rename images
+const uuid = require('uuid');
+//Set up multer options
+const multerOptions = {
+    storage: multer.memoryStorage(),
+    //Check the file type if its okay or not
+    fileFilter(req, file, next) {
+        const isPhoto = file.mimetype.startsWith('image/');
+        if (isPhoto) {
+            next(null, true);
+        } else {
+            next({ message: 'That file type is not allowed!' }, false);
+        }
+    }
+};
+//Controller to handle the file upload using multer save to memory
+exports.upload = multer(multerOptions).single('photo');
+
+//image resize function here
+exports.resize = async (req, res, next) => {
+    //Check if there is no file to resize
+    if (!req.file) {
+        next();//Skip to next middleware
+        return;
+    }
+    const extension = req.file.mimetype.split('/')[1];
+    req.body.photo = `${uuid.v4()}.${extension}`;
+    //Resize now
+    const photo = await jimp.read(req.file.buffer);
+    await photo.resize(800, jimp.AUTO);
+    await photo.write(`./public/uploads/${req.body.photo}`);
+    //Photo saved to folder here Continue to the next middleware
+    next();
+}
 //Controller to get the home Page and display all posts
 exports.homePage = async (req, res) => {
     //CHeck page number from the params sent in the url or set to 1

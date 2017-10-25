@@ -20,7 +20,7 @@ router.get('/post/:slug', catchErrors(postController.getPostBySlug));
 router.get('/login', userController.getLogin);
 
 /* GET get user Register page. */
-router.get('/register',userController.getRegister);
+router.get('/register', userController.getRegister);
 
 /* GET Register user */
 router.post('/register', userController.validateRegister, userController.registerUser, authController.login);
@@ -35,7 +35,12 @@ router.get('/logout', authController.logout);
 router.get('/add', authController.isLoggedIn, postController.getNewPost);
 
 /* Rouute to create new blog post */
-router.post('/add', authController.isLoggedIn, catchErrors(postController.newPost));
+router.post('/add',
+    authController.isLoggedIn,
+    postController.upload,
+    catchErrors(postController.resize),
+    catchErrors(postController.newPost)
+);
 
 /* Rouute to get posts by tags */
 router.get('/tags/:tag', catchErrors(postController.getPostsByTag));
@@ -56,7 +61,12 @@ router.get('/account/posts', authController.isLoggedIn, catchErrors(postControll
 router.get('/post/:id/edit', authController.isLoggedIn, catchErrors(postController.editPost));
 
 /* Rouute to Edit blog post */
-router.post('/add/:id', authController.isLoggedIn, catchErrors(postController.updatePost));
+router.post('/add/:id',
+    authController.isLoggedIn,
+    postController.upload,
+    catchErrors(postController.resize),
+    catchErrors(postController.updatePost)
+);
 
 //Route to get Delete a Post by the user page
 router.get('/post/:id/delete', authController.isLoggedIn, catchErrors(postController.deletePost));

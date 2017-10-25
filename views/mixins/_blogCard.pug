@@ -1,7 +1,7 @@
 mixin blogCard(post = {})
   .card.mb-4
     .thumbnail
-      img(src=`/images/${post.photo}.jpg`, alt="Blog Post Image").blog-card-image
+      img(src=`/uploads/${post.photo}`, alt="Blog Post Image").blog-card-image
       .card-body
         h2.card-title= post.title
         p.card-text!= post.description.split(' ').slice(0, 25).join(' ')

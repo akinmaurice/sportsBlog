@@ -20,6 +20,12 @@ Navigate to /register to register a new user and /login to signin with an existi
 
 Contributions are more than welcome!
 
+# Todo
+
+Add Page View Count
+Replies to Comments
+Update User Profile
+
 # License
 
 See license.txt

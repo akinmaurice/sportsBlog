@@ -1,12 +1,13 @@
 mixin postForm(post = {})
-  form.form-control(action=`/add/${post._id || ''}` method="POST")
+  form.form-control(action=`/add/${post._id || ''}` method="POST" enctype="multipart/form-data")
     .form-group
-      input(type="hidden" name="photo" value=`${post.photo || 'blog'}` )
       input(type="text" name="title" placeholder="Post Title" value=post.title).form-control
     .form-group
       textarea(name="description" id="description" cols="30" rows="10").form-control= post.description
     .form-group
-      input(type="file" name="image").form-control
+      input(type="file" name="photo" accept="image/gif, image/png, image/jpeg").form-control
+      if post.photo
+        img(src=`/uploads/${post.photo}`, alt=post.title height=200 width="100%").blog-card-image
     .form-group
       - const tags = post.tags || []
       each choice in h.menu
