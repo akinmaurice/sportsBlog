@@ -5,6 +5,7 @@ include mixins/_blogCard
 block content
   .col-md-8
     h5.my-4 Search results for '#{searchTerm}'
+    hr
     if posts.length >= 1
       each post in posts
         +blogCard(post)
