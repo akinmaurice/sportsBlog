@@ -1,7 +1,7 @@
 var express = require('express');
-const session = require('express-session');
 // import environmental variables from our variables.env file
 require('dotenv').config();
+const session = require('express-session');
 const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
