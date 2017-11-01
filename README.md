@@ -3,9 +3,13 @@ Blog using Nodejs, Expressjs, Pug and Mongodb.
 
 # Features
 Create/Edit/Delete Article
+
 Post comments on Article
+
 Image Upload for Article
+
 Passport Authentication for Administration
+
 Bcrypt Password Hash
 
 # Getting Started
@@ -23,7 +27,9 @@ Contributions are more than welcome!
 # Todo
 
 Add Page View Count
+
 Replies to Comments
+
 Update User Profile
 
 # License
