@@ -12,8 +12,8 @@ exports.moment = require('moment');
 exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
 //Setup Tags for the Application sideBar
-exports.menu = ['Football', 'BasketBall', 'Tennis', 'Formular 1'];
+exports.menu = ['Web Development', 'Node JS', 'JavaScript', 'Mongo DB', 'Express JS', 'PHP', 'Angular'];
 
 // Website Title
-exports.siteName = `Blog`;
+exports.siteName = `TechBlog`;
 

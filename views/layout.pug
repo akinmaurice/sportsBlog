@@ -15,7 +15,7 @@ html(lang="en")
   body.text-justify
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
       .container-fluid
-        a(href="/").navbar-brand SPORTS BLOG
+        a(href="/").navbar-brand #{h.siteName}
         button(type="button" data-toggle="collapse" data-target="#navbarCollapse"  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation").navbar-toggler.navbar-toggler-right
           span.navbar-toggler-icon
         .collapse.navbar-collapse(id="navbarCollapse")
@@ -64,13 +64,5 @@ html(lang="en")
                 .list-group
                   each item in h.menu
                     a(href=`/tags/${item}`).list-group-item.list-group-item-action= item
-            .card.my-4
-              h5.card-header Side Widget
-              .card-body
-                img(src="/images/sidebar.jpg", alt="sidebar image").sidebarimg.rounded
 
-    block footer
-      footer.py-5.bg-dark.footer
-        .container
-          p.m-0.text-center.text-white Copyright &copy; akinmaurice 2017
 
