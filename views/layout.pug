@@ -24,12 +24,8 @@ html(lang="en")
               a(href="/").nav-link Home
                 span.sr-only (current)
             if user
-                li.nav-item.dopdown
-                   a.nav-link.dropdown-toogle(href="/account" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")= user.email
-                   .dropdown-menu(aria-labelledby="dropdown01")
-                     a.dropdown-item(href="#") Action
-                     a.dropdown-item(href="#") Action
-                     a.dropdown-item(href="#") Action
+                li.nav-item
+                   a.nav-link(href="/account")= user.email
                 li
                   a.nav-link(href="/logout") logout
     .container
